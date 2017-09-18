@@ -288,4 +288,3 @@ y_pred = lg.predict(X_test)
 # Score
 from sklearn import metrics
 metrics.accuracy_score(y_test, y_pred)
-rtsgtrd
