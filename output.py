@@ -264,7 +264,7 @@ data_root = 'F:\\'  # Change me to store data elsewhere
 # print('Number of overlaps between validation and test sets: {}. Execution time: {}.'.format(len(r), execTime))
 
 
-pickle_file = os.path.join(data_root, 'notMNIST.pickle')
+pickle_file = '/home/wyd/tensorflow_file/notMNIST.pickle'
 with open(pickle_file, 'rb') as f:
     save = pickle.load(f)
     train_dataset = save['train_dataset']
@@ -296,6 +296,9 @@ lg.fit(X_train, y_train)
 # Predict
 y_pred = lg.predict(X_test)
 
+print(X_test)
+print(y_pred)
+
 # Score
 from sklearn import metrics
-metrics.accuracy_score(y_test, y_pred)
+print(metrics.accuracy_score(y_test, y_pred))
