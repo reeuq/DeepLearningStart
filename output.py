@@ -221,26 +221,26 @@ train_dataset, train_labels = randomize(train_dataset, train_labels)
 test_dataset, test_labels = randomize(test_dataset, test_labels)
 valid_dataset, valid_labels = randomize(valid_dataset, valid_labels)
 
-pickle_file = os.path.join(data_root, 'notMNIST.pickle')
-
-try:
-    f = open(pickle_file, 'wb')
-    save = {
-        'train_dataset': train_dataset,
-        'train_labels': train_labels,
-        'valid_dataset': valid_dataset,
-        'valid_labels': valid_labels,
-        'test_dataset': test_dataset,
-        'test_labels': test_labels,
-        }
-    pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
-    f.close()
-except Exception as e:
-    print('Unable to save data to', pickle_file, ':', e)
-    raise
-
-statinfo = os.stat(pickle_file)
-print('Compressed pickle size:', statinfo.st_size)
+# pickle_file = os.path.join(data_root, 'notMNIST.pickle')
+#
+# try:
+#     f = open(pickle_file, 'wb')
+#     save = {
+#         'train_dataset': train_dataset,
+#         'train_labels': train_labels,
+#         'valid_dataset': valid_dataset,
+#         'valid_labels': valid_labels,
+#         'test_dataset': test_dataset,
+#         'test_labels': test_labels,
+#         }
+#     pickle.dump(save, f, pickle.HIGHEST_PROTOCOL)
+#     f.close()
+# except Exception as e:
+#     print('Unable to save data to', pickle_file, ':', e)
+#     raise
+#
+# statinfo = os.stat(pickle_file)
+# print('Compressed pickle size:', statinfo.st_size)
 
 #
 # import time
@@ -273,10 +273,7 @@ samples, width, height = test_dataset.shape
 X_test = np.reshape(test_dataset,(samples,width*height))
 y_test = test_labels
 
-# Import
-from sklearn.linear_model import LogisticRegression
-
-# Instantiate
+# Instantiate（实例）
 lg = LogisticRegression(multi_class='multinomial', solver='lbfgs', random_state=42, verbose=1, max_iter=1000, n_jobs=-1)
 
 # Fit
