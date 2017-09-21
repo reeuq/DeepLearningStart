@@ -296,7 +296,7 @@ lg.fit(X_train, y_train)
 # Predict
 y_pred = lg.predict(X_test)
 
-print(X_test)
+print(y_test)
 print(y_pred)
 
 # Score
