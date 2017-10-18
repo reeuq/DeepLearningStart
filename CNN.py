@@ -1,8 +1,8 @@
 import numpy as np
 import tensorflow as tf
 
-from neural.full_connect import accuracy
-from not_mnist.img_pickle import load_pickle
+
+from six.moves import cPickle as pickle
 
 
 def reformat(dataset, labels, image_size, num_labels, num_channels):
@@ -13,18 +13,19 @@ def reformat(dataset, labels, image_size, num_labels, num_channels):
 
 
 def load_reformat_not_mnist(image_size, num_labels, num_channels):
-    pickle_file = '../not_mnist/notMNIST_clean.pickle'
-    save = load_pickle(pickle_file)
-    train_dataset = save['train_dataset']
-    train_labels = save['train_labels']
-    valid_dataset = save['valid_dataset']
-    valid_labels = save['valid_labels']
-    test_dataset = save['test_dataset']
-    test_labels = save['test_labels']
-    del save  # hint to help gc free up memory
-    print('Training set', train_dataset.shape, train_labels.shape)
-    print('Validation set', valid_dataset.shape, valid_labels.shape)
-    print('Test set', test_dataset.shape, test_labels.shape)
+    pickle_file = '/home/wyd/tensorflow_file/notMNIST.pickle'
+    with open(pickle_file, 'rb') as f:
+        save = pickle.load(f)
+        train_dataset = save['train_dataset']
+        train_labels = save['train_labels']
+        valid_dataset = save['valid_dataset']
+        valid_labels = save['valid_labels']
+        test_dataset = save['test_dataset']
+        test_labels = save['test_labels']
+        del save  # hint to help gc free up memory
+        print('Training set', train_dataset.shape, train_labels.shape)
+        print('Validation set', valid_dataset.shape, valid_labels.shape)
+        print('Test set', test_dataset.shape, test_labels.shape)
     train_dataset, train_labels = reformat(train_dataset, train_labels, image_size, num_labels, num_channels)
     valid_dataset, valid_labels = reformat(valid_dataset, valid_labels, image_size, num_labels, num_channels)
     test_dataset, test_labels = reformat(test_dataset, test_labels, image_size, num_labels, num_channels)
@@ -289,6 +290,12 @@ if __name__ == '__main__':
     num_labels = 10
     train_dataset, train_labels, valid_dataset, valid_labels, test_dataset, test_labels = \
         load_reformat_not_mnist(image_size, num_labels, 1)
+
+    def accuracy(predictions, labels):
+        return (100.0 * np.sum(np.argmax(predictions, 1) == np.argmax(labels, 1))
+                / predictions.shape[0])
+
+
     # conv_max_pool_train()
     # conv_train()
     better_conv_train(lrd=True)
