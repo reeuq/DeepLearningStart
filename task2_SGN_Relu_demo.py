@@ -7,7 +7,7 @@ import tensorflow as tf
 from six.moves import cPickle as pickle
 from six.moves import range
 
-pickle_file = '/home/wyd/tensorflow_file/notMNIST.pickle'
+pickle_file = 'F://notMNIST.pickle'
 
 with open(pickle_file, 'rb') as f:
     save = pickle.load(f)

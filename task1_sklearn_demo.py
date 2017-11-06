@@ -287,18 +287,19 @@ samples, width, height = test_dataset.shape
 X_test = np.reshape(test_dataset,(samples,width*height))
 y_test = test_labels
 
-# Instantiate（实例）
-lg = LogisticRegression(multi_class='multinomial', solver='lbfgs', random_state=42, verbose=1, max_iter=1000, n_jobs=-1)
+if __name__=='__main__':
+    # Instantiate（实例）
+    lg = LogisticRegression(multi_class='multinomial', solver='lbfgs', random_state=42, verbose=1, max_iter=1000, n_jobs=-1)
 
-# Fit
-lg.fit(X_train, y_train)
+    # Fit
+    lg.fit(X_train, y_train)
 
-# Predict
-y_pred = lg.predict(X_test)
+    # Predict
+    y_pred = lg.predict(X_test)
 
-print(y_test)
-print(y_pred)
+    print(y_test)
+    print(y_pred)
 
-# Score
-from sklearn import metrics
-print(metrics.accuracy_score(y_test, y_pred))
+    # Score
+    from sklearn import metrics
+    print(metrics.accuracy_score(y_test, y_pred))
