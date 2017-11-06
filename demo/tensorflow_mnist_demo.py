@@ -10,7 +10,7 @@ Created on Wed Sep 13 11:02:35 2017
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
-mnist = input_data.read_data_sets("/home/wyd/TensorFlow/mnist", one_hot=True)
+mnist = input_data.read_data_sets("../resource/mnist", one_hot=True)
 
 x = tf.placeholder(tf.float32, [None, 784])
 W = tf.Variable(tf.zeros([784, 10]))
